@@ -41,6 +41,10 @@ function App() {
     socket.emit("votar-banda", id);
   };
 
+  const borrarBanda = (id) => {
+    socket.emit("borrar-banda", id);
+  };
+
   return (
     <div className="container">
       <div className="alert">
@@ -59,7 +63,7 @@ function App() {
 
       <div className="row">
         <div className="col-8">
-          <BandList bands={bands} votar={votar} />
+          <BandList bands={bands} votar={votar} borrarBanda={borrarBanda} />
         </div>
         <div className="col-4">
           <BandAdd />
