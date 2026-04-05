@@ -1,20 +1,21 @@
-import { BandAdd } from "./components/BandAdd";
-import { BandList } from "./components/BandList";
-import { useState, useEffect } from "react";
-import { useSocket } from "./hooks/useSocket";
+import { BandAdd } from "../components/BandAdd";
+import { BandList } from "../components/BandList";
+import { useState, useEffect, useContext } from "react";
+import { useSocket } from "../hooks/useSocket";
+import { SocketContext } from "../context/SocketContext";
 
-function App() {
-  const [bands, setBands] = useState([]);
+function HomePage() {
+  //const [bands, setBands] = useState([]);
 
-  const { socket, online } = useSocket("http://localhost:8080");
+  const { online } = useContext(SocketContext);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     socket.on("current-bands", (data) => {
       setBands(data);
     });
-  }, [socket]);
+  }, [socket]); */
 
-  const votar = (id) => {
+  /* const votar = (id) => {
     socket.emit("votar-banda", id);
   };
 
@@ -24,7 +25,7 @@ function App() {
 
   const cambiarNombreBanda = (id, nombre) => {
     socket.emit("cambiar-nombre-banda", { id, nombre });
-  };
+  }; */
 
   return (
     <div className="container">
@@ -44,19 +45,17 @@ function App() {
 
       <div className="row">
         <div className="col-8">
-          <BandList
+          {/* <BandList
             bands={bands}
             votar={votar}
             borrarBanda={borrarBanda}
             cambiarNombreBanda={cambiarNombreBanda}
-          />
+          /> */}
         </div>
-        <div className="col-4">
-          <BandAdd />
-        </div>
+        <div className="col-4">{/* <BandAdd /> */}</div>
       </div>
     </div>
   );
 }
 
-export default App;
+export default HomePage;
