@@ -1,7 +1,12 @@
 import React from "react";
+import RouterPage from "./pages/RouterPage";
 
 const TicketApp = () => {
-  return <div>TicketApp</div>;
+  return (
+    <>
+      <RouterPage />
+    </>
+  );
 };
 
 export default TicketApp;
