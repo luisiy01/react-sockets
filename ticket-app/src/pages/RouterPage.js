@@ -12,7 +12,7 @@ const RouterPage = () => {
   return (
     <Router>
       <Layout style={{ height: "100vh" }}>
-        <Sider>
+        <Sider collapsedWidth={0} breakpoint="md">
           <div className="demo-logo-vertical" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1" icon={<UserOutlined />}>
