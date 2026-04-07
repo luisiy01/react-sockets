@@ -1,9 +1,12 @@
 import { Row, Col, Typography, Button, Divider } from "antd";
 import { CloseCircleOutlined, DownloadOutlined } from "@ant-design/icons";
+import { useHideMenu } from "../hooks/useHideMenu";
 
 const { Title, Text } = Typography;
 
 const CrearTicket = () => {
+  useHideMenu(true);
+
   const nuevoTicket = () => {
     console.log("nuevoTicket");
   };

@@ -1,5 +1,6 @@
 import { Row, Col, Typography, Button, Divider, List, Card, Tag } from "antd";
 import { CloseCircleOutlined, DownloadOutlined } from "@ant-design/icons";
+import { useHideMenu } from "../hooks/useHideMenu";
 
 const { Title, Text } = Typography;
 
@@ -42,6 +43,8 @@ const data = [
 ];
 
 const Cola = () => {
+  useHideMenu(true);
+
   return (
     <>
       <Title level={1}>Atendiendo al cliente</Title>
