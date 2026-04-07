@@ -3,6 +3,7 @@ import { CloseCircleOutlined, DownloadOutlined } from "@ant-design/icons";
 import { useHideMenu } from "../hooks/useHideMenu";
 import { SocketContext } from "../context/SocketContext";
 import { useContext, useState, useEffect } from "react";
+import { getUltimos } from "../helpers/getUltimos";
 
 const { Title, Text } = Typography;
 
@@ -19,6 +20,12 @@ const Cola = () => {
 
     return () => socket.off("ticket-asignado");
   }, [socket]);
+
+  useEffect(() => {
+    getUltimos().then((tickets) => {
+      setTickets(tickets);
+    });
+  }, []);
 
   return (
     <>
