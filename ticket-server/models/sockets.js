@@ -25,6 +25,8 @@ class Sockets {
           data.agente,
         );
         callback(ticketAsignado);
+
+        this.io.emit("ticket-asignado", this.ticketList.ultimos13);
       });
     });
   }
