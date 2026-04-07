@@ -1,0 +1,38 @@
+const Ticket = require("./ticket");
+
+class TicketList {
+  constructor() {
+    this.ultimoNumero = 0;
+    this.pendientes = [];
+    this.asignados = [];
+  }
+
+  get siguienteNumero() {
+    this.ultimoNumero++;
+    return this.ultimoNumero;
+  }
+
+  get ultimos13() {
+    return this.asignados.slice(0, 13);
+  }
+
+  crearTicket() {
+    const nuevoTicket = new Ticket(this.siguienteNumero);
+    this.pendientes.push(nuevoTicket);
+    return nuevoTicket;
+  }
+
+  asignarTicket(escritorio, agente) {
+    if (this.pendientes.length === 0) {
+      return null;
+    }
+
+    const siguienteTicket = this.pendientes.shift();
+    siguienteTicket.escritorio = escritorio;
+    siguienteTicket.agente = agente;
+    this.asignados.unshift(siguienteTicket);
+    return siguienteTicket;
+  }
+}
+
+module.exports = TicketList;
