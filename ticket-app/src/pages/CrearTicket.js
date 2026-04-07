@@ -1,14 +1,21 @@
 import { Row, Col, Typography, Button, Divider } from "antd";
 import { CloseCircleOutlined, DownloadOutlined } from "@ant-design/icons";
 import { useHideMenu } from "../hooks/useHideMenu";
+import { SocketContext } from "../context/SocketContext";
+import { useContext, useState } from "react";
 
 const { Title, Text } = Typography;
 
 const CrearTicket = () => {
   useHideMenu(true);
 
+  const { socket } = useContext(SocketContext);
+  const [ticket, setTicket] = useState(null);
+
   const nuevoTicket = () => {
-    console.log("nuevoTicket");
+    socket.emit("solicitar-ticket", null, (ticket) => {
+      setTicket(ticket);
+    });
   };
   return (
     <>
@@ -26,15 +33,18 @@ const CrearTicket = () => {
           </Button>
         </Col>
       </Row>
-      <Row style={{ marginTop: "100px" }}>
-        <Col span={14} offset={6} align="center">
-          <Text level={2}>Su numero es: </Text>
-          <br />
-          <Text type="success" style={{ fontSize: 55 }} level={1}>
-            12
-          </Text>
-        </Col>
-      </Row>
+
+      {ticket && (
+        <Row style={{ marginTop: "100px" }}>
+          <Col span={14} offset={6} align="center">
+            <Text level={2}>Su numero es: </Text>
+            <br />
+            <Text type="success" style={{ fontSize: 55 }} level={1}>
+              {ticket?.numero}
+            </Text>
+          </Col>
+        </Row>
+      )}
     </>
   );
 };
