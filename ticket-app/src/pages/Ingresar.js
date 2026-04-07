@@ -1,23 +1,32 @@
 import { Button, Divider, Form, Input, InputNumber, Typography } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 import { useHideMenu } from "../hooks/useHideMenu";
+import { useState } from "react";
+import { getUsuarioStorage } from "../helpers/getUsuarioStorage";
 
 const { Title, Text } = Typography;
 
 const Ingresar = () => {
   useHideMenu(false);
+  const [usuario] = useState(getUsuarioStorage());
 
   const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = ({ agente, escritorio }) => {
+    localStorage.setItem("agente", agente);
+    localStorage.setItem("escritorio", escritorio);
+
     navigate("/escritorio");
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  if (usuario.agente && usuario.escritorio) {
+    redirect("/escritorio");
+  }
 
   return (
     <>
